@@ -13,13 +13,13 @@ void TaskController::acceptTask(Task &t)
 {
     validateTask(t);
 
-    serializeTask(t);
+    saveTask(t);
 }
 
 void TaskController::validateTask(const Task &t) const
 {
 }
 
-void TaskController::serializeTask(const Task &t) const
+void TaskController::saveTask(const Task &t) const
 {
 }

@@ -14,5 +14,5 @@ class TaskController
         TaskController() {}
 
         void validateTask(const Task &t) const;
-        void serializeTask(const Task &t) const;
+        void saveTask(const Task &t) const;
 };
