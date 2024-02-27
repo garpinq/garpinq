@@ -4,6 +4,9 @@
 
 #include <iostream>
 #include <stdlib.h>
+
+#include "Task.h"
+#include "TaskController.h"
 #include "app.h"
 
 std::string task_scheduler::Greeter::greeting() {
@@ -11,7 +14,13 @@ std::string task_scheduler::Greeter::greeting() {
 }
 
 int main () {
-    task_scheduler::Greeter greeter;
-    std::cout << greeter.greeting() << std::endl;
+    Task newTask;
+
+    TaskController &controller = TaskController::getInstance();
+
+    controller.acceptTask(newTask);
+
+    std::cout << "Accepted task" << std::endl;
+
     return 0;
 }
