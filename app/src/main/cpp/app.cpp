@@ -6,6 +6,7 @@
 #include <stdlib.h>
 
 #include "Task.h"
+#include "TaskId.h"
 #include "TaskController.h"
 #include "app.h"
 
@@ -14,7 +15,9 @@ std::string task_scheduler::Greeter::greeting() {
 }
 
 int main () {
-    Task newTask;
+    TaskId id("task-for-demonstration");
+    Task newTask(id);
+    newTask.setNumShots(12345);
 
     TaskController &controller = TaskController::getInstance();
 
