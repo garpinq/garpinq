@@ -5,6 +5,8 @@
 #include <iostream>
 #include <stdlib.h>
 
+#include "Shot.h"
+#include "ShotController.h"
 #include "Task.h"
 #include "TaskId.h"
 #include "TaskController.h"
@@ -19,11 +21,19 @@ int main () {
     Task newTask(id);
     newTask.setNumShots(12345);
 
-    TaskController &controller = TaskController::getInstance();
+    TaskController &taskController = TaskController::getInstance();
 
-    controller.acceptTask(newTask);
+    taskController.acceptTask(newTask);
 
     std::cout << "Accepted task" << std::endl;
+
+    ShotController &shotController = ShotController::getInstance();
+
+    Shot* nextShot = shotController.getNextShot();
+
+    std::cout << "Retrieved shot" << std::endl;
+
+    delete nextShot;
 
     return 0;
 }
