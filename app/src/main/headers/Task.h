@@ -6,6 +6,7 @@ class Task
 {
     public:
         Task(const TaskId taskId);
+        Task(const Task& otherTask);
 
         TaskId getId() const;
 

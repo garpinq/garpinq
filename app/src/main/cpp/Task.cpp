@@ -4,6 +4,10 @@ Task::Task(const TaskId taskId): id(taskId), numShots(0)
 {
 }
 
+Task::Task(const Task& otherTask): id(otherTask.id), numShots(otherTask.numShots)
+{
+}
+
 TaskId Task::getId() const
 {
     return id;
