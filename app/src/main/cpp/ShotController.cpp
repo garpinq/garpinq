@@ -3,6 +3,8 @@
 #include <assert.h>
 #include "Task.h"
 #include "TaskId.h"
+#include "TaskPersistenceManager.h"
+#include "TaskPersistenceManagerFactory.h"
 
 ShotController& ShotController::getInstance()
 {
@@ -23,17 +25,19 @@ Shot* ShotController::getNextShot()
 
 Task* ShotController::getNextTask()
 {
-    // This is where the policy logic really comes into play
-    static TaskId taskId("placeholder-task");
-    static Task placeholderTask(taskId);
+    // This is where the policy logic should come into play
+    static TaskId taskId("task-for-demonstration");
 
-    return &placeholderTask;
+    TaskPersistenceManager *persistenceMgr = TaskPersistenceManagerFactory::getTaskPersistenceManager();
+    Task *task = persistenceMgr->fetchTask(taskId);
+
+    return task;
 }
 
 Shot* ShotController::generateShotFromTask(const Task* parentTask)
 {
     assert(parentTask != 0);
 
-    // For now, just return a generic task
+    // For now, just return a generic shot
     return new Shot();
 }

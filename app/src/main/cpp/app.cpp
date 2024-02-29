@@ -5,11 +5,13 @@
 #include <iostream>
 #include <stdlib.h>
 
+#include "InMemoryTaskPersistenceManager.h"
 #include "Shot.h"
 #include "ShotController.h"
 #include "Task.h"
 #include "TaskId.h"
 #include "TaskController.h"
+#include "TaskPersistenceManagerFactory.h"
 #include "app.h"
 
 std::string task_scheduler::Greeter::greeting() {
@@ -17,6 +19,9 @@ std::string task_scheduler::Greeter::greeting() {
 }
 
 int main () {
+    InMemoryTaskPersistenceManager persistenceMgr;
+    TaskPersistenceManagerFactory::setTaskPersistenceManager(&persistenceMgr);
+
     TaskId id("task-for-demonstration");
     Task newTask(id);
     newTask.setNumShots(12345);
