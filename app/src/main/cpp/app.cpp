@@ -18,11 +18,14 @@ std::string task_scheduler::Greeter::greeting() {
     return std::string("Hello, World!");
 }
 
-int main () {
-    InMemoryTaskPersistenceManager persistenceMgr;
-    TaskPersistenceManagerFactory::setTaskPersistenceManager(&persistenceMgr);
+void log(const char* msg)
+{
+    std::cout << msg << std::endl;
+}
 
-    TaskId id("task-for-demonstration");
+void acceptTask(std::string taskName)
+{
+    TaskId id(taskName);
     Task newTask(id);
     newTask.setNumShots(12345);
 
@@ -30,15 +33,28 @@ int main () {
 
     taskController.acceptTask(newTask);
 
-    std::cout << "Accepted task" << std::endl;
+    log("Accepted task");
+}
 
+void getNextShot()
+{
     ShotController &shotController = ShotController::getInstance();
 
     Shot* nextShot = shotController.getNextShot();
 
-    std::cout << "Retrieved shot" << std::endl;
+    log("Retrieved shot");
 
     delete nextShot;
+}
+
+int main () {
+    InMemoryTaskPersistenceManager persistenceMgr;
+    TaskPersistenceManagerFactory::setTaskPersistenceManager(&persistenceMgr);
+    log("Setup complete");
+
+    acceptTask("task-for-demonstration");
+
+    getNextShot();
 
     return 0;
 }
